@@ -1,14 +1,13 @@
 
 hello_words = "Привіт! Це гра дешифратор у якій ти маєш вгадати таємничий код з 4 цифр. Спробуй розгадати їх."
 
-rules = ("Правила гри : Lorem ipsum dolor sit amet, "
-         "consectetur adipisci elit, sed eiusmod tempor incidunt ut "
-         "labore et dolore magna aliqua. Ut enim ad minim veniam, "
-         "quis nostrum exercitationem ullam corporis suscipit laboriosam, "
-         "nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in "
-         "voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint "
-         "obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+rules = ("""Правила гри : 
+            Дешифратор — це логічна гра, в якій дешифратор намагається розгадати таємний код, 
+            створений кододавцем(програмою). Кододавець(гравець), яким буде виступати програма, яку ми 
+            збираємося написати, створює таємний код з чотирьох чисел від 1 до 6. Дешифратор має деяку кількість спроб розгадати код (залежно від обраної складності). На кожному ходу дешифратор робить спробу з 4 чисел. 
+            Кододавець позначає спробу до 4 знаками - + або - або порожніми місцями.""")
 
 
+simple_difficulty_rules = ("При виборі простого рівня ви маєте п'ять спроб щоб вгадати число, та можете використати 3 підказки.")
 
-
+hard_difficulty_rules = ("При виборі складного рівня, ви маєте три спроби вгадати число, та можете використати 2 підказки")

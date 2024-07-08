@@ -11,6 +11,7 @@ class HintManager:
                     if 1 <= hint_position <= 4:
                         print(f"Підказка : на позиції {hint_position} цифра {self.secret_number[hint_position - 1]}")
                         self.hints_left -= 1
+                        print(f"Підказок залишилось : {self.hints_left}")
                         break
                     else:
                         print("Ви ввели не коректне значення, введіть від 1 до 4")

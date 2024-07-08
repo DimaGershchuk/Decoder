@@ -1,7 +1,9 @@
 import re
+from hello_and_rules import simple_difficulty_rules, hard_difficulty_rules
 from hint_manager import HintManager
 from secret_number_generator import SecretNumberGenerator
 from guess_checker import GuessChecker
+from statistic_manager import StatisticsManager
 
 
 class Game:
@@ -9,6 +11,8 @@ class Game:
         self.secret_number = ''
         self.hints_manager = None
         self.attempts = 0
+        self.statistics_manager = StatisticsManager()
+        self.current_difficulty = ''
 
     def start(self):
         generator = SecretNumberGenerator()
@@ -22,10 +26,14 @@ class Game:
         while True:
             difficulty_guess = input("Оберіть рівень складності, Простий чи Складний : ")
             if difficulty_guess == 'Простий':
+                print(simple_difficulty_rules)
                 self.hints_manager.hints_left = 3
+                self.current_difficulty = 'Простий'
                 return 5
             elif difficulty_guess == 'Складний':
+                print(hard_difficulty_rules)
                 self.hints_manager.hints_left = 2
+                self.current_difficulty = 'Складний'
                 return 3
             else:
                 print("Некоректне значення, введіть один з запропонованих рівней складності ")
@@ -46,7 +54,7 @@ class Game:
 
                 if result == '++++':
                     print(f"Ви вгадали число {self.secret_number} та перемогли!!")
-                    break
+                    self.statistics_manager.record_win(self.current_difficulty)
 
                 else:
                     self.attempts -= 1
@@ -66,10 +74,10 @@ class Game:
 
                 if self.attempts == 0:
                     print(f"У вас не залишилось спроб. Ви програли, таємниче число : {self.secret_number}. Розпочніть гру знову!")
+                    self.statistics_manager.record_loss(self.current_difficulty)
                     continue
             else:
                 print("Ви ввели некоректне значення, введіть число з 4 цифр від 1 до 6")
-
 
 
 

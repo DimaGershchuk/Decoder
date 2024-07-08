@@ -19,6 +19,8 @@ class Menu:
             elif start == 'Вихід':
                 print("Прощавайте, до зустрічі!")
                 break
+            elif start == 'Статистика':
+                self.game.statistics_manager.print_statistics()
             else:
                 print("Ви ввели непередбачену команду. Будь ласка, виберіть одну з перерахованих команд")
                 continue
