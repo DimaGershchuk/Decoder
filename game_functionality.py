@@ -13,6 +13,7 @@ class Game:
         self.attempts = 0
         self.statistics_manager = StatisticsManager()
         self.current_difficulty = ''
+        self.load_statistics()
 
     def start(self):
         generator = SecretNumberGenerator()
@@ -24,14 +25,14 @@ class Game:
 
     def difficulty_choose(self):
         while True:
+            print(simple_difficulty_rules)
+            print(hard_difficulty_rules)
             difficulty_guess = input("Оберіть рівень складності, Простий чи Складний : ")
             if difficulty_guess == 'Простий':
-                print(simple_difficulty_rules)
                 self.hints_manager.hints_left = 3
                 self.current_difficulty = 'Простий'
                 return 5
             elif difficulty_guess == 'Складний':
-                print(hard_difficulty_rules)
                 self.hints_manager.hints_left = 2
                 self.current_difficulty = 'Складний'
                 return 3
@@ -55,6 +56,7 @@ class Game:
                 if result == '++++':
                     print(f"Ви вгадали число {self.secret_number} та перемогли!!")
                     self.statistics_manager.record_win(self.current_difficulty)
+                    self.save_statistics()
 
                 else:
                     self.attempts -= 1
@@ -75,9 +77,27 @@ class Game:
                 if self.attempts == 0:
                     print(f"У вас не залишилось спроб. Ви програли, таємниче число : {self.secret_number}. Розпочніть гру знову!")
                     self.statistics_manager.record_loss(self.current_difficulty)
+                    self.save_statistics()
                     continue
             else:
                 print("Ви ввели некоректне значення, введіть число з 4 цифр від 1 до 6")
+
+    def save_statistics(self):
+        with open('statistics.txt', 'w') as file:
+            file.write(f'{self.statistics_manager.total_wins} {self.statistics_manager.total_losses} '
+                       f'{self.statistics_manager.easy_wins} {self.statistics_manager.easy_losses} '
+                       f'{self.statistics_manager.hard_wins} {self.statistics_manager.hard_losses}\n')
+
+    def load_statistics(self):
+        try:
+            with open('statistics.txt', 'r') as file:
+                line = file.readline().strip()
+                if line:
+                    (self.statistics_manager.total_wins, self.statistics_manager.total_losses,
+                     self.statistics_manager.easy_wins, self.statistics_manager.easy_losses,
+                     self.statistics_manager.hard_wins, self.statistics_manager.hard_losses) = map(int, line.split())
+        except FileNotFoundError:
+            pass
 
 
 

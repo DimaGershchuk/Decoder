@@ -7,5 +7,5 @@ class SecretNumberGenerator:
 
     def generate_number(self):
         self.secret_number = ''.join([str(random.randint(1, 6)) for _ in range(4)])
-        #  print(f"Згенероване число для тестування: {self.secret_number}")  # Видаліть у фінальній версії
+        #  self.secret_number = '6543'
         return self.secret_number
