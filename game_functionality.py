@@ -57,6 +57,7 @@ class Game:
                     print(f"Ви вгадали число {self.secret_number} та перемогли!!")
                     self.statistics_manager.record_win(self.current_difficulty)
                     self.save_statistics()
+                    break
 
                 else:
                     self.attempts -= 1
